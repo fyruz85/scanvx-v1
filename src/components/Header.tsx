@@ -13,7 +13,7 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const activeId = useScrollSpy(navLinks.map((l) => l.id));
+  const activeId = useScrollSpy(navLinks.map((link) => link.id));
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -29,23 +29,23 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b bg-white transition-all duration-300 ${
         scrolled
-          ? 'border-b border-white/10 bg-[#06152d]/90 shadow-xl shadow-black/20 backdrop-blur-xl'
-          : 'bg-[#071a37]/55 backdrop-blur-sm'
+          ? 'border-slate-200 shadow-lg shadow-slate-900/10'
+          : 'border-slate-100'
       }`}
     >
       <div className="container-mx container-px">
-        <div className="flex h-[72px] items-center justify-between lg:h-[84px]">
+        <div className="flex h-[78px] items-center justify-between lg:h-[92px]">
           <button
             onClick={() => scrollTo('home')}
-            className="flex items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+            className="flex items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             aria-label="ScanVX Solutions home"
           >
             <img
               src="/images/scanvx-logo.svg"
               alt="ScanVX Solutions"
-              className="h-11 w-auto sm:h-12 lg:h-14"
+              className="h-[58px] w-auto sm:h-[64px] lg:h-[72px]"
             />
           </button>
 
@@ -55,12 +55,14 @@ export function Header() {
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
                 className={`relative px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
-                  activeId === link.id ? 'text-white' : 'text-slate-300 hover:text-white'
+                  activeId === link.id
+                    ? 'text-slate-950'
+                    : 'text-slate-600 hover:text-slate-950'
                 }`}
               >
                 {link.label}
                 {activeId === link.id && (
-                  <span className="absolute bottom-0 left-1/2 h-0.5 w-7 -translate-x-1/2 rounded-full bg-[#2ea8ff]" />
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-7 -translate-x-1/2 rounded-full bg-blue-600" />
                 )}
               </button>
             ))}
@@ -68,14 +70,14 @@ export function Header() {
 
           <button
             onClick={() => scrollTo('contact')}
-            className="hidden items-center rounded-lg bg-[#147cf0] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-[#268cff] lg:inline-flex"
+            className="hidden items-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 lg:inline-flex"
           >
             Free Consultation
           </button>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-900 transition-colors hover:bg-slate-100 lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
@@ -84,15 +86,15 @@ export function Header() {
         </div>
 
         {mobileOpen && (
-          <nav className="mb-4 flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#071a37]/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden">
+          <nav className="mb-4 flex flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl lg:hidden">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
                 className={`rounded-lg px-4 py-3 text-left text-sm font-semibold transition-colors ${
                   activeId === link.id
-                    ? 'bg-blue-500/15 text-blue-300'
-                    : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                    ? 'bg-blue-50 text-blue-700'
+                    : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950'
                 }`}
               >
                 {link.label}
@@ -100,7 +102,7 @@ export function Header() {
             ))}
             <button
               onClick={() => scrollTo('contact')}
-              className="mt-2 rounded-lg bg-[#147cf0] px-5 py-3 text-sm font-bold text-white"
+              className="mt-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white"
             >
               Free Consultation
             </button>
