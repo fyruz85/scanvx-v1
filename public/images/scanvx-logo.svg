@@ -1,0 +1,17 @@
+<svg width="360" height="96" viewBox="0 0 360 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">ScanVX Solutions</title>
+  <desc id="desc">A modern technology logo with a blue scan ring, check mark and red X accent.</desc>
+  <g transform="translate(4 4)">
+    <path d="M74 14C54 3 28 8 14 29C2 47 5 70 19 84" stroke="#1D8CFF" stroke-width="8" stroke-linecap="round"/>
+    <path d="M20 84C38 95 62 91 77 75" stroke="#55C8FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M27 49L43 64L78 27" stroke="#2EA8FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M70 17H83M76 11V24" stroke="#EF3E4A" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M13 34H28M11 43H23M18 25H34" stroke="#69D3FF" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+    <circle cx="10" cy="34" r="2.5" fill="#69D3FF"/><circle cx="8" cy="43" r="2.5" fill="#69D3FF"/><circle cx="15" cy="25" r="2.5" fill="#69D3FF"/>
+  </g>
+  <g transform="translate(101 17)">
+    <text x="0" y="38" fill="#F7FAFF" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="800" letter-spacing="-2">SCANV</text>
+    <path d="M149 6L164 26L179 6H191L170 34L191 62H178L164 42L149 62H136L158 34L137 6H149Z" fill="#EF3E4A"/>
+    <text x="2" y="69" fill="#8FA8C6" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="6">SOLUTIONS</text>
+  </g>
+</svg>
