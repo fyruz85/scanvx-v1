@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-ink-700 antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold text-ink-900;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply px-5 sm:px-6 lg:px-8;
+  }
+  .container-mx {
+    @apply mx-auto max-w-7xl;
+  }
+  .section-pad {
+    @apply py-20 lg:py-28;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#34d399] bg-clip-text text-transparent;
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(56,189,248,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.08) 1px, transparent 1px);
+    background-size: 58px 58px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 15%, transparent 65%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 15%, transparent 65%);
+  }
+  .hero-bg {
+    background: radial-gradient(circle at 72% 45%, #0b3972 0%, #071f43 31%, #04152f 68%, #031126 100%);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #061a38;
+}
+::-webkit-scrollbar-thumb {
+  background: #1379ef;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1466e1;
+}
