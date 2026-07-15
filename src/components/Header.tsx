@@ -5,8 +5,8 @@ import { useScrollSpy } from '../hooks/useScrollSpy';
 const navLinks = [
   { id: 'home', label: 'Home' },
   { id: 'services', label: 'Services' },
-  { id: 'projects', label: 'Portfolio' },
-  { id: 'why', label: 'Why Us' },
+  { id: 'projects', label: 'Solutions' },
+  { id: 'why', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -31,80 +31,68 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-ink-950/85 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-ink-950/20'
-          : 'bg-transparent'
+          ? 'border-b border-white/10 bg-[#06152d]/90 shadow-xl shadow-black/20 backdrop-blur-xl'
+          : 'bg-[#071a37]/55 backdrop-blur-sm'
       }`}
     >
       <div className="container-mx container-px">
-        <div className="flex h-16 items-center justify-between lg:h-20">
-          {/* Logo */}
+        <div className="flex h-[72px] items-center justify-between lg:h-[84px]">
           <button
             onClick={() => scrollTo('home')}
-            className="flex items-center"
-            aria-label="ScanVX Solution home"
+            className="flex items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+            aria-label="ScanVX Solutions home"
           >
             <img
-              src="/images/logo.png"
-              alt="ScanVX Solution"
-              className="h-10 w-auto lg:h-12"
-              style={{
-                filter:
-                  'brightness(1.8) contrast(0.9) drop-shadow(0 0 8px rgba(59,180,255,0.4))',
-              }}
+              src="/images/scanvx-logo.svg"
+              alt="ScanVX Solutions"
+              className="h-11 w-auto sm:h-12 lg:h-14"
             />
           </button>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                  activeId === link.id
-                    ? 'text-white'
-                    : 'text-ink-300 hover:text-white'
+                className={`relative px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
+                  activeId === link.id ? 'text-white' : 'text-slate-300 hover:text-white'
                 }`}
               >
                 {link.label}
                 {activeId === link.id && (
-                  <span className="absolute bottom-0 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-brand-400" />
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-7 -translate-x-1/2 rounded-full bg-[#2ea8ff]" />
                 )}
               </button>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden items-center lg:flex">
-            <button
-              onClick={() => scrollTo('contact')}
-              className="rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-600/30 transition-all duration-300 hover:shadow-brand-600/50 hover:brightness-110"
-            >
-              Get Started
-            </button>
-          </div>
+          <button
+            onClick={() => scrollTo('contact')}
+            className="hidden items-center rounded-lg bg-[#147cf0] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-[#268cff] lg:inline-flex"
+          >
+            Free Consultation
+          </button>
 
-          {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 lg:hidden"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         {mobileOpen && (
-          <nav className="mb-4 flex flex-col gap-1 rounded-2xl bg-ink-900/95 p-3 backdrop-blur-xl lg:hidden">
+          <nav className="mb-4 flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#071a37]/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className={`rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors ${
+                className={`rounded-lg px-4 py-3 text-left text-sm font-semibold transition-colors ${
                   activeId === link.id
-                    ? 'bg-brand-600/20 text-brand-300'
-                    : 'text-ink-300 hover:bg-white/5 hover:text-white'
+                    ? 'bg-blue-500/15 text-blue-300'
+                    : 'text-slate-300 hover:bg-white/5 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -112,9 +100,9 @@ export function Header() {
             ))}
             <button
               onClick={() => scrollTo('contact')}
-              className="mt-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-5 py-3 text-sm font-semibold text-white"
+              className="mt-2 rounded-lg bg-[#147cf0] px-5 py-3 text-sm font-bold text-white"
             >
-              Get Started
+              Free Consultation
             </button>
           </nav>
         )}
