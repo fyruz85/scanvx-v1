@@ -16,7 +16,7 @@ export function Header() {
   const activeId = useScrollSpy(navLinks.map((link) => link.id));
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
+    const handler = () => setScrolled(window.scrollY > 24);
     handler();
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
@@ -28,86 +28,116 @@ export function Header() {
   };
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 border-b bg-white transition-all duration-300 ${
-        scrolled
-          ? 'border-slate-200 shadow-lg shadow-slate-900/10'
-          : 'border-slate-100'
-      }`}
-    >
-      <div className="container-mx container-px">
-        <div className="flex h-[78px] items-center justify-between lg:h-[92px]">
-          <button
-            onClick={() => scrollTo('home')}
-            className="flex items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            aria-label="ScanVX Solutions home"
+    <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4 sm:px-4">
+      <div
+        className={`mx-auto max-w-[1280px] rounded-[20px] border bg-white/95 backdrop-blur-xl transition-all duration-300 ${
+          scrolled
+            ? 'border-slate-200 shadow-[0_18px_45px_rgba(15,23,42,0.18)]'
+            : 'border-white/80 shadow-[0_14px_38px_rgba(6,24,54,0.14)]'
+        }`}
+      >
+        <div className="px-4 sm:px-5 lg:px-6">
+          <div
+            className={`flex items-center justify-between transition-all duration-300 ${
+              scrolled ? 'h-[66px] lg:h-[70px]' : 'h-[72px] lg:h-[78px]'
+            }`}
           >
-            <img
-              src="/images/scanvx-logo.svg"
-              alt="ScanVX Solutions"
-              className="h-[58px] w-auto sm:h-[64px] lg:h-[72px]"
-            />
-          </button>
-
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
-            {navLinks.map((link) => (
+            <div className="flex min-w-0 items-center gap-4">
               <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className={`relative px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
-                  activeId === link.id
-                    ? 'text-slate-950'
-                    : 'text-slate-600 hover:text-slate-950'
-                }`}
+                onClick={() => scrollTo('home')}
+                className="flex shrink-0 items-center rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                aria-label="ScanVX Solutions home"
               >
-                {link.label}
-                {activeId === link.id && (
-                  <span className="absolute bottom-0 left-1/2 h-0.5 w-7 -translate-x-1/2 rounded-full bg-blue-600" />
-                )}
+                <img
+                  src="/images/scanvx-logo.svg"
+                  alt="ScanVX Solutions"
+                  className={`w-auto transition-all duration-300 ${
+                    scrolled
+                      ? 'h-[48px] sm:h-[52px] lg:h-[54px]'
+                      : 'h-[52px] sm:h-[56px] lg:h-[60px]'
+                  }`}
+                />
               </button>
-            ))}
-          </nav>
 
-          <button
-            onClick={() => scrollTo('contact')}
-            className="hidden items-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 lg:inline-flex"
-          >
-            Free Consultation
-          </button>
+              <span className="hidden h-8 w-px bg-slate-200 xl:block" aria-hidden="true" />
+            </div>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-900 transition-colors hover:bg-slate-100 lg:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
+            <nav
+              className="hidden items-center gap-1 rounded-2xl bg-slate-50/80 p-1 lg:flex"
+              aria-label="Primary navigation"
+            >
+              {navLinks.map((link) => {
+                const isActive = activeId === link.id;
 
-        {mobileOpen && (
-          <nav className="mb-4 flex flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl lg:hidden">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className={`rounded-lg px-4 py-3 text-left text-sm font-semibold transition-colors ${
-                  activeId === link.id
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollTo(link.id)}
+                    className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                      isActive
+                        ? 'bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100'
+                        : 'text-slate-600 hover:bg-white hover:text-slate-950 hover:shadow-sm'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.label}
+                  </button>
+                );
+              })}
+            </nav>
+
             <button
               onClick={() => scrollTo('contact')}
-              className="mt-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white"
+              className="hidden items-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-[0_10px_24px_rgba(37,99,235,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_14px_28px_rgba(37,99,235,0.34)] lg:inline-flex"
             >
               Free Consultation
             </button>
-          </nav>
-        )}
+
+            <button
+              onClick={() => setMobileOpen((open) => !open)}
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-900 transition-colors hover:bg-blue-50 hover:text-blue-700 lg:hidden"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+
+          {mobileOpen && (
+            <nav
+              className="mb-3 border-t border-slate-100 pb-1 pt-3 lg:hidden"
+              aria-label="Mobile navigation"
+            >
+              <div className="flex flex-col gap-1 rounded-2xl bg-slate-50/80 p-2">
+                {navLinks.map((link) => {
+                  const isActive = activeId === link.id;
+
+                  return (
+                    <button
+                      key={link.id}
+                      onClick={() => scrollTo(link.id)}
+                      className={`rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors ${
+                        isActive
+                          ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-100'
+                          : 'text-slate-700 hover:bg-white hover:text-slate-950'
+                      }`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </button>
+                  );
+                })}
+
+                <button
+                  onClick={() => scrollTo('contact')}
+                  className="mt-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition-colors hover:bg-blue-700"
+                >
+                  Free Consultation
+                </button>
+              </div>
+            </nav>
+          )}
+        </div>
       </div>
     </header>
   );
